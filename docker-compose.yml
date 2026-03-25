@@ -10,3 +10,14 @@ services:
       - /data/jhooq-springboot-container
     ports:
       - "8080-8100:8080"
+services:
+  app:
+    build: ./app
+    ports:
+      - "8080:8080"
+
+  prometheus:
+    image: prom/prometheus
+
+  grafana:
+    image: grafana/grafana

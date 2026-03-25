@@ -1,48 +1,55 @@
 pipeline {
     agent any
+
     environment {
-        dockerimagename = "genesispatil/graddleapp"
-        dockerImage = ""
+        IMAGE = "your-dockerhub/springboot-app:${BUILD_NUMBER}"
     }
+
     stages {
-        stage('Checkout code') {
-          steps{
-              git branch: 'main', url: 'https://github.com/jaydeep283/k8s-jenkins-graddleApp.git'          }
-        }
 
-        stage('Graddle Build') {
-          steps{
-              sh './gradlew build'
-          }
-        }
-
-        stage('Build image') {
-          steps{
-            script {
-              dockerImage = docker.build dockerimagename
+        stage('Checkout') {
+            steps {
+                checkout scm
             }
-          }
         }
 
-        stage('Pushing Image') {
-          environment {
-                   registryCredential = 'dockerhublogin'
-               }
-          steps{
-            script {
-              docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
-                dockerImage.push("latest")
-              }
+        stage('Build') {
+            steps {
+                sh 'cd app && ./gradlew clean build'
             }
-          }
         }
 
-        stage('Deploying App to Kubernetes') {
-          steps {
-            script {
-              kubernetesDeploy(configs: "k8s-spring-boot-deployment.yml", kubeconfigId: "kubernetes")
+        stage('Test') {
+            steps {
+                sh 'cd app && ./gradlew test'
             }
-          }
+        }
+
+        stage('Static Analysis') {
+            steps {
+                echo 'Run SonarQube (optional)'
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t $IMAGE ./app'
+            }
+        }
+
+        stage('Push Image') {
+            steps {
+                sh 'docker push $IMAGE'
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                sh '''
+                sed -i "s|IMAGE_PLACEHOLDER|$IMAGE|g" deployments/base/deployment.yaml
+                kubectl apply -f deployments/base/
+                '''
+            }
         }
     }
 }
