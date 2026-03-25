@@ -1,0 +1,17 @@
+# Java
+build/
+*.jar
+*.war
+
+# Gradle
+.gradle/
+
+# OS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+
+# Logs
+*.log
