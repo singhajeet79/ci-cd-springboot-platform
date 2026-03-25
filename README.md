@@ -1,1 +1,1 @@
-# k8s-jenkins-graddleApp
+## Originally forked, heavily refactored into production-grade system
