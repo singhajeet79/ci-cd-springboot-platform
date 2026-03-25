@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        IMAGE = "your-dockerhub/springboot-app:${BUILD_NUMBER}"
+        IMAGE = "as35/springboot-app:${BUILD_NUMBER}"
     }
 
     stages {
