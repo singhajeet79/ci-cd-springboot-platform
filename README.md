@@ -8,12 +8,14 @@ GitHub → CI → Docker Hub → ArgoCD → Kubernetes
 ## ⚙️ Stack
 Spring Boot (Java 17), Gradle, Docker, Kubernetes, ArgoCD, Prometheus, Grafana
 
-## 🔁 Pipeline<img width="1917" height="953" alt="Screenshot from 2026-03-26 15-04-47" src="https://github.com/user-attachments/assets/df7efb12-783f-4606-b93a-8d171c6395ec" />
+## 🔁 Pipeline
 
 - Build & test
 - Docker image (tagged with git SHA)
 - Push to registry
 - Auto-deploy via ArgoCD (GitOps)
+
+---
 
 ## 📌 Highlights
 - Immutable deployments
@@ -21,5 +23,10 @@ Spring Boot (Java 17), Gradle, Docker, Kubernetes, ArgoCD, Prometheus, Grafana
 - Kubernetes-ready setup
 - Clean, modular structure
 
-## 👤 Author
-Ajeet Singh — AI/ML/DevOps / Platform Engineering
+---
+
+<img width="1917" height="953" alt="Screenshot from 2026-03-26 15-04-47" src="https://github.com/user-attachments/assets/df7efb12-783f-4606-b93a-8d171c6395ec" />
+
+---
+#### Check out [My GitHub Page](https://singhajeet79.github.io/) for more AI/MLOps/Data Engineering projects. 
+**Happy Engineering!** 🚀
